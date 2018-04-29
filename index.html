@@ -18,10 +18,14 @@
           <h1>BookLook<i class="fa fa-eye" aria-hidden="true"></i></h1>
         </div>
         <script id="book-template" type="text/x-handlebars-template">
-          <h1>{{title}}</h1>
-          <p class="description">{{description}}</p>
-          <h4 class="author"><h4>Written By: {{authors}}</h4>
-          <div class="book-image"><img src={{imageLinks.thumbnail}}></div>
+          <ul>
+              <li>
+                <h2 class='title'>{{title}}</h2>
+                <p class="description">{{description}}</p>
+                <h4 class="author"><h4>Written By: {{authors}}</h4>
+                <div class="book-image"><img src={{imageLinks.thumbnail}}></div>
+              </li>
+          </ul>
         </script>
         <div class="book">
         </div>

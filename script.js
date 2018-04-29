@@ -1,11 +1,11 @@
 var fetch = function (bookNumber) {
     $.ajax({
       method: "GET",
-      url: 'https://www.googleapis.com/books/v1/volumes?q=isbn:' + bookNumber,
+      url: 'https://www.googleapis.com/books/v1/volumes?q=intitle:' + bookNumber,
       success: function(data) {
         var jsonObj = JSON.stringify(data);
         var obj = JSON.parse(jsonObj);
-        renderBook(obj.items[0].volumeInfo);
+        renderBook(obj);
       },
       error: function(jqXHR, textStatus, errorThrown) {
         console.log(textStatus);
@@ -13,20 +13,12 @@ var fetch = function (bookNumber) {
     }); 
   };
   var renderBook = function (book) {
-    /*var title = book.items[0].volumeInfo.title;
-    var image = book.items[0].volumeInfo.imageLinks;
-    var description = book.items[0].volumeInfo.description;
-    var author = book.items[0].volumeInfo.authors;
-    for (var i = 0; i<4; i++) {
+      for (var i=0; i<book.items.length; i++) {
         var source = $('#book-template').html();
         var template = Handlebars.compile(source);
-        var newHTML = template({item: "bread", price: "15"});
-        $('.items').append(newHTML);
-    }*/
-    var source = $('#book-template').html();
-    var template = Handlebars.compile(source);
-    var newHTML = template(book);
-    $('.book').append(newHTML);
+        var newHTML = template(book.items[i].volumeInfo);
+        $('.book').append(newHTML);
+      }
   }
   $('.add-ISBN').on('click', function () {
       var $ISBN = $('#book-number').val();
